@@ -26,8 +26,8 @@ class LoginForm extends Component {
 
 				<CardSection>
 					<HighlightText>
-						Birds in the sky carry these words for me.
-						Flowers make me whole and the something something yeah
+						All the Lorem Ipsum generators on the Internet
+						tend to repeat predefined chunks as necessary
 					</HighlightText>
 				</CardSection>
 
