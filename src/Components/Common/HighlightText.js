@@ -34,6 +34,7 @@ class HighlightText extends Component {
 	renderLines() {
 		let textString = this.props.children;
 		// let lineSec = textString.slice(0, 28).lastIndexOf(' ');
+		textString = textString.concat(' ');
 		let numOfLines = Math.ceil(textString.length / 28);
 		console.log(textString.length);
 		let lineStart = 0;
@@ -44,6 +45,7 @@ class HighlightText extends Component {
 		let allWords = textString.split(' ');
 		let lastWord = allWords[allWords.length - 1];
 		textString = textString.concat(' ' + lastWord);
+		console.log(textString);
 		for (i = 0; i < numOfLines; i++) {
 			let lineSec = textString.slice(lineStart, lineEnd);
 			console.log(lineSec);
