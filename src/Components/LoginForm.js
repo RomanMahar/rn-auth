@@ -25,7 +25,7 @@ class LoginForm extends Component {
 				</CardSection>
 
 				<CardSection>
-					<HighlightText>
+					<HighlightText splitOn={28}>
 						All the Lorem Ipsum generators on the Internet
 						tend to repeat predefined chunks as necessary
 					</HighlightText>

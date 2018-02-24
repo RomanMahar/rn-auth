@@ -27,23 +27,22 @@ import { View, Text } from 'react-native';
 // 	);
 // };
 class HighlightText extends Component {
-	constructor(props) {
-		super(props);
-	}
 	state = { lines: [] };
 	renderLines() {
 		let textString = this.props.children;
+		const splitOn = this.props.splitOn;
+		console.log(splitOn);
 		// let lineSec = textString.slice(0, 28).lastIndexOf(' ');
 		textString = textString.concat(' ');
-		let numOfLines = Math.ceil(textString.length / 28);
+		const numOfLines = Math.ceil(textString.length / splitOn);
 		console.log(textString.length);
 		let lineStart = 0;
-		let lineEnd = textString.slice(0, 28).lastIndexOf(' '); // will return 19
+		let lineEnd = textString.slice(0, splitOn).lastIndexOf(' '); // will return 19
 		console.log(textString.slice(20, 48));
 		console.log(textString.slice(20, 48).lastIndexOf(' '));
-		let fakeLineEnd = lineStart + 28;
-		let allWords = textString.split(' ');
-		let lastWord = allWords[allWords.length - 1];
+		let fakeLineEnd = lineStart + splitOn;
+		const allWords = textString.split(' ');
+		const lastWord = allWords[allWords.length - 1];
 		textString = textString.concat(' ' + lastWord);
 		console.log(textString);
 		for (i = 0; i < numOfLines; i++) {
@@ -52,7 +51,7 @@ class HighlightText extends Component {
 			this.state.lines.push(lineSec);
 			console.log(this.state.lines);
 			lineStart = lineEnd + 1;
-			fakeLineEnd = lineStart + 28;
+			fakeLineEnd = lineStart + splitOn;
 			lineEnd = textString.slice(0, fakeLineEnd).lastIndexOf(' ');
 			console.log(lineStart);
 			console.log(fakeLineEnd);
