@@ -43,6 +43,7 @@ class HighlightText extends Component {
 		let fakeLineEnd = lineStart + 28;
 		let allWords = textString.split(' ');
 		let lastWord = allWords[allWords.length - 1];
+		textString = textString.concat(' ' + lastWord);
 		for (i = 0; i < numOfLines; i++) {
 			let lineSec = textString.slice(lineStart, lineEnd);
 			console.log(lineSec);
@@ -50,18 +51,15 @@ class HighlightText extends Component {
 			console.log(this.state.lines);
 			lineStart = lineEnd + 1;
 			fakeLineEnd = lineStart + 28;
-			// 1st time. 19 plus 28. 47
-			// lineEnd = textString.slice(20, 47).lastIndexOf(' ');
 			lineEnd = textString.slice(0, fakeLineEnd).lastIndexOf(' ');
 			console.log(lineStart);
 			console.log(fakeLineEnd);
 			console.log(lineEnd);
 		}
-		this.state.lines.push(lastWord);
 		return this.state.lines.map((lineSec, i) => 
 			<View>
 				<Text style={{ marginTop: 6 }}>
-					<Text style={styles.textStyle} key={i.toString()}>{i} {lineSec}</Text>
+					<Text style={styles.textStyle} key={i.toString()}>{lineSec}</Text>
 				</Text>
 			</View>
 		);

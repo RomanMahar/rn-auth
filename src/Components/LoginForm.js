@@ -26,7 +26,8 @@ class LoginForm extends Component {
 
 				<CardSection>
 					<HighlightText>
-						Anselmann Edesheimer Ordensgut Dry Dornfelder 2015
+						All the Lorem Ipsum generators on the Internet
+						tend to repeat predefined chunks as necessary
 					</HighlightText>
 				</CardSection>
 
