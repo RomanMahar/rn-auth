@@ -1,10 +1,55 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
-import { Button, Card, CardSection, Input, HighlightText } from './Common';
+import firebase from 'firebase';
+import { Button, Card, CardSection, Input, HighlightText, Spinner } from './Common';
 
 class LoginForm extends Component {
 	// in react, we hold the text outside of the text input. We hold it in the state
-	state = { text: '' };
+	state = { email: '', password: '', error: '', loading: false };
+
+	onButtonPress() {
+		const { email, password } = this.state;
+
+		this.setState({ error: '', loading: true });
+
+		firebase.auth().signInWithEmailAndPassword(email, password)
+			.then(this.onLoginSuccess.bind(this))
+			.catch(() => {
+				firebase.auth().createUserWithEmailAndPassword(email, password)
+					.then(this.onLoginSuccess.bind(this))
+					.catch(() => {
+						this.setState({ error: 'Authentication failed.' })
+					});
+			});
+	}
+
+	onLoginFail() {
+		this.setState() {
+			loading: false,
+			error: 'Authentication failed'
+		}
+	}
+
+	onLoginSuccess() {
+		this.setState({
+			email: '',
+			password: '',
+			loading: false,
+			error: ''
+		});
+	}
+
+	renderButton() {
+		if (this.state.loading) {
+			return <Spinner size="small" />;
+		}
+
+		return (
+			<Button onPress={this.onButtonPress.bind(this)}>
+				Log in
+			</Button>
+		);
+	}
 
 	render() {
 		return (
@@ -12,19 +57,33 @@ class LoginForm extends Component {
 				
 				<CardSection>
 					<Input
-					value={this.state.text}
-					label={'label'}
-					onChangeText={text => this.setState({ text })} 
+						placeholder="username@emailhost.com"
+						value={this.state.email}
+						label={'Email'}
+						// choosing not to rename "text" argument to email as reminder. But could.
+						// if text arg were renamed, then "this.setState({ email })" would be refactor
+						onChangeText={text => this.setState({ email: text })} 
+					/>
+				</CardSection>
+				<CardSection>
+					<Input
+						placeholder="password"
+						secureTextEntry
+						value={this.state.password}
+						label="Password"
+						onChangeText={password => this.setState({ password })}
 					/>
 				</CardSection>
 
-				<CardSection>
-					<Button>
-						Log in
-					</Button>
-				</CardSection>
+				<Text style={styles.errorMessageStyle}>
+					{this.state.error}
+				</Text>
 
 				<CardSection>
+					{this.renderButton()}
+				</CardSection>
+
+				{/* <CardSection>
 					<HighlightText
 						splitOn={28}
 						fontSize={28}
@@ -33,14 +92,21 @@ class LoginForm extends Component {
 						backgroundColor={'#4F0A72'}
 					>
 						Analogues antimensariousilics
-						Analogues antimensarious ilicslya saswi aihdsaiohdio ihasidhas hishai
+						Analogues antimensariousilicslya saswi aihdsaiohdio ihasidhas hishai
 					</HighlightText>
-				</CardSection>
+				</CardSection> */}
 
 			</Card>
 		);
 	}
 }
 
+const styles = {
+	errorMessageStyle: {
+		fontSize: 20,
+		alignSelf: 'center',
+		color: '#e73042'
+	}
+}
 
 export default LoginForm;
