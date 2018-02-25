@@ -5,27 +5,46 @@ class HighlightText extends Component {
 	state = { lines: [] };
 	renderLines() {
 		let textString = this.props.children;
+		// splitOn is integer value. Input expected char count max per line as prop
 		const splitOn = this.props.splitOn;
-		// let lineSec = textString.slice(0, 28).lastIndexOf(' ');
+		// Adds space to end of string, preventing cutoff of last word
 		textString = textString.concat(' ');
 		const numOfLines = Math.ceil(textString.length / splitOn);
 		let lineStart = 0;
-		let lineEnd = textString.slice(0, splitOn).lastIndexOf(' '); // will return 19
+		let lineEnd = textString.slice(0, splitOn).lastIndexOf(' ');
 		let fakeLineEnd = lineStart + splitOn;
-		const allWords = textString.split(' ');
-		const lastWord = allWords[allWords.length - 1];
-		textString = textString.concat(' ' + lastWord);
-		for (i = 0; i < numOfLines; i++) {
+		for (i = 0; i < numOfLines + 1; i++) {
 			let lineSec = textString.slice(lineStart, lineEnd);
-			this.state.lines.push(lineSec);
+			console.log(Boolean(lineSec));
+			// Adds space to end of each line for visual padding
+			if (lineSec.length > 0) {
+				lineSec = lineSec.concat(' ');
+				lineSec = ' ' + lineSec;
+				this.state.lines.push(lineSec);
+			}
 			lineStart = lineEnd + 1;
 			fakeLineEnd = lineStart + splitOn;
 			lineEnd = textString.slice(0, fakeLineEnd).lastIndexOf(' ');
+			console.log(Boolean(lineSec));
+			console.log(this.state.lines);
 		}
 		return this.state.lines.map((lineSec, i) => 
-			<View>
-				<Text style={{ marginTop: 6 }}>
-					<Text style={styles.textStyle} key={i.toString()}>{lineSec}</Text>
+			<View
+				style={{
+					marginTop: this.props.marginTop,  
+			}}
+			>
+				<Text>
+					<Text 
+						style={{ 
+							fontSize: this.props.fontSize,
+							color: this.props.color,
+							backgroundColor: this.props.backgroundColor
+						}} 
+						key={i.toString()}
+					>
+							{lineSec}
+						</Text>
 				</Text>
 			</View>
 		);
@@ -38,13 +57,5 @@ class HighlightText extends Component {
 		);
 	}
 }
-
-const styles = {
-	textStyle: {
-		fontSize: 28, 
-		color: '#fff',
-		backgroundColor: '#4F0A72'
-	}
-};
 
 export { HighlightText };

@@ -22,7 +22,7 @@ const styles = {
 		flex: 1
 	},
 	TextInputStyle: {
-		flex: 2,
+		flex: 4,
 		color: '#000',
 		paddingLeft: 5,
 		paddingRight: 5,

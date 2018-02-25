@@ -25,9 +25,15 @@ class LoginForm extends Component {
 				</CardSection>
 
 				<CardSection>
-					<HighlightText splitOn={28}>
-						All the Lorem Ipsum generators on the Internet
-						tend to repeat predefined chunks as necessary
+					<HighlightText
+						splitOn={28}
+						fontSize={28}
+						marginTop={6}
+						color={'#fff'}
+						backgroundColor={'#4F0A72'}
+					>
+						Analogues antimensariousilics
+						Analogues antimensarious ilicslya saswi aihdsaiohdio ihasidhas hishai
 					</HighlightText>
 				</CardSection>
 
