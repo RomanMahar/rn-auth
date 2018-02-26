@@ -18,7 +18,8 @@ class HighlightText extends Component {
 		 that can push content beyond the above calculated numOfLines */
 		for (i = 0; i < numOfLines * 2; i++) {
 			let line = textString.slice(lineStart, lineEnd);
-			// Adds spaces to start and end of already populated lines for visual padding
+			/* 1. Adds spaces to start and end of already populated lines for visual padding 
+			   2. only pushes to Array if length of line is > 0 */
 			if (line.length > 0) {
 				line = singleSpace + line + singleSpace;
 				this.state.lines.push(line);
@@ -38,8 +39,7 @@ class HighlightText extends Component {
 						style={{ 
 							fontSize: this.props.fontSize,
 							color: this.props.color,
-							backgroundColor: this.props.backgroundColor
-						}} 
+							backgroundColor: this.props.backgroundColor }} 
 						key={i.toString()}
 					>
 							{line}
